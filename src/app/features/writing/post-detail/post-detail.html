@@ -1,0 +1,50 @@
+@let p = post();
+<article class="page-container max-w-3xl! pt-12 sm:pt-20">
+  <a appButton variant="ghost" size="sm" routerLink="/writing" class="-ml-3">
+    <app-icon name="arrow-left" [size]="16" />
+    All writing
+  </a>
+
+  <header class="mt-8 border-b border-line pb-8">
+    <time class="text-sm text-muted tabular-nums" [attr.datetime]="p.date">{{
+      p.date | date: 'longDate' : 'UTC'
+    }}</time>
+    <h1 class="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
+      {{ p.title }}
+    </h1>
+    <p class="mt-4 text-lg text-muted" [innerHTML]="p.summary | tex"></p>
+    <div class="mt-4 flex flex-wrap gap-1.5">
+      @for (tag of p.tags; track tag) {
+        <app-tag>{{ tag }}</app-tag>
+      }
+    </div>
+  </header>
+
+  <div class="prose-body mt-8 text-lg">
+    @for (block of p.body; track $index) {
+      @switch (block.type) {
+        @case ('paragraph') {
+          <p [innerHTML]="block.text | tex"></p>
+        }
+        @case ('heading') {
+          <h2 [innerHTML]="block.text | tex"></h2>
+        }
+        @case ('math') {
+          <app-math [tex]="block.tex" />
+        }
+        @case ('code') {
+          <pre
+            [attr.data-language]="block.language"
+          ><code>{{ block.code }}</code></pre>
+        }
+        @case ('list') {
+          <ul>
+            @for (item of block.items; track $index) {
+              <li [innerHTML]="item | tex"></li>
+            }
+          </ul>
+        }
+      }
+    }
+  </div>
+</article>

@@ -1,0 +1,213 @@
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <!-- Decorative background glow + grid -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div
+      class="absolute -top-40 left-1/2 h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-linear-to-r from-accent/25 to-accent-2/25 blur-3xl"
+    ></div>
+    <div class="hero-grid absolute inset-0 opacity-40"></div>
+  </div>
+
+  <div
+    class="page-container grid items-center gap-12 pb-20 pt-20 sm:pt-28 lg:grid-cols-[1.4fr_1fr]"
+  >
+    <div>
+      @if (profile.location) {
+        <p
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-sm text-muted"
+        >
+          <app-icon name="map-pin" [size]="14" />
+          {{ profile.location }}
+        </p>
+      }
+      <h1
+        class="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
+      >
+        Hi, I'm <span class="text-gradient">{{ profile.name }}</span>.
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-muted sm:text-xl">
+        {{ profile.tagline }}
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a appButton size="lg" routerLink="/projects">
+          View my work
+          <app-icon name="arrow-right" [size]="18" />
+        </a>
+        @if (profile.cvUrl) {
+          <a
+            appButton
+            appExternal
+            variant="secondary"
+            size="lg"
+            [href]="profile.cvUrl"
+          >
+            <app-icon name="file-text" [size]="18" />
+            CV
+          </a>
+        }
+        <div class="ml-1 flex items-center gap-1">
+          @for (social of profile.socials; track social.href) {
+            <a
+              appButton
+              appExternal
+              variant="ghost"
+              square
+              [href]="social.href"
+              [attr.aria-label]="social.label"
+            >
+              <app-icon [name]="social.icon" [size]="20" />
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo + math card. The photo moves above the greeting on small screens. -->
+    <div
+      class="order-first flex flex-col items-start gap-8 lg:order-last lg:items-center"
+    >
+      @if (profile.photoUrl) {
+        <img
+          [ngSrc]="profile.photoUrl"
+          [alt]="'Photo of ' + profile.name"
+          width="512"
+          height="512"
+          priority
+          class="size-40 rounded-full border-4 border-surface shadow-2xl shadow-accent/20 sm:size-52 lg:size-72"
+        />
+      }
+
+      <!-- Math card: swap the equation for a favorite of your own. -->
+      <app-card
+        class="hidden rotate-1 self-stretch shadow-2xl shadow-accent/10 lg:flex"
+      >
+        <div class="flex items-center gap-1.5" aria-hidden="true">
+          <span class="size-3 rounded-full bg-line"></span>
+          <span class="size-3 rounded-full bg-line"></span>
+          <span class="size-3 rounded-full bg-line"></span>
+        </div>
+        <app-math
+          class="py-4 text-xl"
+          tex="\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\, e^{-2\pi i x \xi}\, dx"
+        />
+        <p class="font-mono text-xs text-muted">
+          // theorem.prove(); code.ship();
+        </p>
+      </app-card>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="page-container scroll-mt-24 py-16">
+  <app-section-heading eyebrow="About" title="A bit about me" />
+  <div class="mt-10 grid gap-10 lg:grid-cols-[2fr_1fr] lg:gap-16">
+    <div class="flex flex-col gap-5 text-lg leading-relaxed text-muted">
+      @for (paragraph of profile.bio; track $index) {
+        <p [innerHTML]="paragraph | tex"></p>
+      }
+    </div>
+
+    @if (profile.interests.length) {
+      <div>
+        <h3 class="text-sm font-semibold tracking-wider text-ink uppercase">
+          Research interests
+        </h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          @for (interest of profile.interests; track interest) {
+            <li>
+              <app-tag tone="accent">{{ interest }}</app-tag>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Featured projects (hidden when nothing is marked `featured`) -->
+@if (projects.length) {
+  <section class="page-container py-16">
+    <app-section-heading eyebrow="Projects" title="Featured work">
+      <a appButton variant="ghost" routerLink="/projects">
+        All projects <app-icon name="arrow-right" [size]="16" />
+      </a>
+    </app-section-heading>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @for (project of projects; track project.slug) {
+        <app-project-card [project]="project" />
+      }
+    </div>
+  </section>
+}
+
+<!-- Research + writing -->
+<section class="page-container grid gap-16 py-16 lg:grid-cols-2">
+  <div>
+    <app-section-heading eyebrow="Research" title="Selected papers">
+      @if (publications.length) {
+        <a appButton variant="ghost" routerLink="/research">
+          All <app-icon name="arrow-right" [size]="16" />
+        </a>
+      }
+    </app-section-heading>
+    @if (publications.length) {
+      <ol class="mt-10 flex flex-col gap-10">
+        @for (pub of publications; track pub.title) {
+          <li>
+            <app-publication-item [publication]="pub" [showAbstract]="false" />
+          </li>
+        }
+      </ol>
+    } @else {
+      <app-empty-state
+        class="mt-10"
+        icon="file-text"
+        message="Papers and talks coming soon."
+      />
+    }
+  </div>
+
+  <div>
+    <app-section-heading eyebrow="Writing" title="Recent posts">
+      @if (posts.length) {
+        <a appButton variant="ghost" routerLink="/writing">
+          All <app-icon name="arrow-right" [size]="16" />
+        </a>
+      }
+    </app-section-heading>
+    @if (posts.length) {
+      <ol class="mt-10 flex flex-col gap-2">
+        @for (post of posts; track post.slug) {
+          <li><app-post-item [post]="post" /></li>
+        }
+      </ol>
+    } @else {
+      <app-empty-state
+        class="mt-10"
+        icon="file-text"
+        message="No posts yet. Check back soon."
+      />
+    }
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="page-container pt-16">
+  <div
+    class="relative overflow-hidden rounded-3xl bg-linear-to-br from-accent to-accent-2 px-8 py-14 text-center text-accent-ink sm:px-16"
+  >
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Let's talk</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg opacity-90">
+      Open to interesting problems — engineering, mathematical, or both.
+    </p>
+    <a
+      [href]="'mailto:' + profile.email"
+      class="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-accent-ink px-6 font-medium text-ink transition-transform hover:-translate-y-px"
+    >
+      <app-icon name="mail" [size]="18" />
+      {{ profile.email }}
+    </a>
+  </div>
+</section>

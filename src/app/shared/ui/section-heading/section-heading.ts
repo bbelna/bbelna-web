@@ -18,7 +18,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     <div class="max-w-2xl">
       @if (eyebrow()) {
         <p
-          class="mb-2 text-sm font-semibold tracking-wider text-accent uppercase"
+          [class]="
+            'mb-2 text-sm font-semibold tracking-wider text-accent ' +
+            'uppercase'
+          "
         >
           {{ eyebrow() }}
         </p>

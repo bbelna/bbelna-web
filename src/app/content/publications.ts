@@ -10,7 +10,9 @@ export const PUBLICATIONS: Publication[] = [
     year: 2026,
     kind: 'preprint',
     abstract:
-      'We show that for every bounded linear operator $T$ on a Hilbert space $H$, a placeholder estimate holds: $$\\|T^n x\\| \\le C\\,\\rho(T)^n \\|x\\|.$$ This sentence stands in for the rest of the abstract.',
+      'We show that for every bounded linear operator $T$ on a Hilbert space ' +
+      '$H$, a placeholder estimate holds: $$\\|T^n x\\| \\le C\\,\\rho(T)^n ' +
+      '\\|x\\|.$$ This sentence stands in for the rest of the abstract.',
     links: [
       { label: 'arXiv', href: 'https://arxiv.org/', icon: 'file-text' },
       { label: 'PDF', href: '#', icon: 'file-text' },
@@ -24,7 +26,9 @@ export const PUBLICATIONS: Publication[] = [
     year: 2025,
     kind: 'journal',
     abstract:
-      'We prove that every graph $G$ with maximum degree $\\Delta$ admits a proper coloring with at most $\\Delta + 1$ colors, and discuss a placeholder refinement.',
+      'We prove that every graph $G$ with maximum degree $\\Delta$ admits a ' +
+      'proper coloring with at most $\\Delta + 1$ colors, and discuss a ' +
+      'placeholder refinement.',
     links: [{ label: 'DOI', href: 'https://doi.org/', icon: 'arrow-up-right' }],
     featured: true,
   },

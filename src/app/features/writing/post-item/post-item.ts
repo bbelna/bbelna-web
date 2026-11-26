@@ -16,19 +16,28 @@ import { Icon, Tag } from '@shared/ui';
     @let p = post();
     <a
       [routerLink]="['/writing', p.slug]"
-      class="group -mx-4 flex flex-col gap-2 rounded-2xl p-4 transition-colors hover:bg-surface-2"
+      [class]="
+        'group -mx-4 flex flex-col gap-2 rounded-2xl p-4 ' +
+        'transition-colors hover:bg-surface-2'
+      "
     >
       <time class="text-sm text-muted tabular-nums" [attr.datetime]="p.date">{{
         p.date | date: 'mediumDate' : 'UTC'
       }}</time>
       <h3
-        class="flex items-center gap-2 text-lg font-semibold transition-colors group-hover:text-accent"
+        [class]="
+          'flex items-center gap-2 text-lg font-semibold ' +
+          'transition-colors group-hover:text-accent'
+        "
       >
         {{ p.title }}
         <app-icon
           name="arrow-right"
           [size]="16"
-          class="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+          [class]="
+            '-translate-x-1 opacity-0 transition-all ' +
+            'group-hover:translate-x-0 group-hover:opacity-100'
+          "
         />
       </h3>
       <p class="text-muted" [innerHTML]="p.summary | tex"></p>

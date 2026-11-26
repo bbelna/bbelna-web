@@ -7,7 +7,8 @@ import {
 } from '@features/writing/post-detail/post.resolvers';
 
 /**
- * Each route's `title` becomes "<title> · Brandon Belna" and `data.description`
+ * Each route's `title` becomes "<title> · Brandon Belna" and
+ * `data.description`
  * the meta description (see PageTitleStrategy). Keep in sync with
  * app.routes.server.ts.
  */

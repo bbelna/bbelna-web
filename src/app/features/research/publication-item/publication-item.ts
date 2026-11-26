@@ -56,7 +56,10 @@ const KIND_LABELS: Record<PublicationKind, string> = {
             <a
               appExternal
               [href]="link.href"
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+              [class]="
+                'inline-flex items-center gap-1.5 text-sm font-medium ' +
+                'text-accent hover:underline'
+              "
             >
               @if (link.icon) {
                 <app-icon [name]="link.icon" [size]="14" />

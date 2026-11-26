@@ -15,7 +15,11 @@ import { PublicationItem } from './publication-item/publication-item';
         level="1"
         eyebrow="Research"
         title="Papers, preprints & talks"
-        description="A placeholder sentence describing your research interests and how to find your work elsewhere (Google Scholar, arXiv, ORCID)."
+        [description]="
+          'I am an active independent researcher in mathematics. ' +
+          'My current interests lie in mathematical physics ' +
+          'and anywhere mathematics and computing intersect.'
+        "
       />
       <ol class="mt-12 flex max-w-3xl flex-col divide-y divide-line">
         @for (pub of publications; track pub.title) {

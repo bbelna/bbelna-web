@@ -17,7 +17,9 @@ const TONES: Record<TagTone, string> = {
 /**
  * Small pill label for tech stacks, topics, publication types, etc.
  *
- * @example <app-tag>TypeScript</app-tag> <app-tag tone="accent">Preprint</app-tag>
+ * @example
+ * <app-tag>TypeScript</app-tag>
+ * <app-tag tone="accent">Preprint</app-tag>
  */
 @Component({
   selector: 'app-tag',

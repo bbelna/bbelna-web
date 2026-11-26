@@ -3,18 +3,28 @@
   <!-- Decorative background glow + grid -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
     <div
-      class="absolute -top-40 left-1/2 h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-linear-to-r from-accent/25 to-accent-2/25 blur-3xl"
+      [class]="
+        'absolute -top-40 left-1/2 h-[36rem] w-[56rem] ' +
+        '-translate-x-1/2 rounded-full bg-linear-to-r ' +
+        'from-accent/25 to-accent-2/25 blur-3xl'
+      "
     ></div>
     <div class="hero-grid absolute inset-0 opacity-40"></div>
   </div>
 
   <div
-    class="page-container grid items-center gap-12 pb-20 pt-20 sm:pt-28 lg:grid-cols-[1.4fr_1fr]"
+    [class]="
+      'page-container grid items-center gap-12 pb-20 pt-20 ' +
+      'sm:pt-28 lg:grid-cols-[1.4fr_1fr]'
+    "
   >
     <div>
       @if (profile.location) {
         <p
-          class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-sm text-muted"
+          [class]="
+            'mb-6 inline-flex items-center gap-2 rounded-full border ' +
+            'border-line bg-surface/70 px-3 py-1 text-sm text-muted'
+          "
         >
           <app-icon name="map-pin" [size]="14" />
           {{ profile.location }}
@@ -30,10 +40,6 @@
       </p>
 
       <div class="mt-10 flex flex-wrap items-center gap-3">
-        <a appButton size="lg" routerLink="/projects">
-          View my work
-          <app-icon name="arrow-right" [size]="18" />
-        </a>
         @if (profile.cvUrl) {
           <a
             appButton
@@ -63,9 +69,12 @@
       </div>
     </div>
 
-    <!-- Photo + math card. The photo moves above the greeting on small screens. -->
+    <!-- Photo + math card. The photo moves above the greeting on phones. -->
     <div
-      class="order-first flex flex-col items-start gap-8 lg:order-last lg:items-center"
+      [class]="
+        'order-first flex flex-col items-start gap-8 lg:order-last ' +
+        'lg:items-center'
+      "
     >
       @if (profile.photoUrl) {
         <img
@@ -74,12 +83,15 @@
           width="512"
           height="512"
           priority
-          class="size-40 rounded-full border-4 border-surface shadow-2xl shadow-accent/20 sm:size-52 lg:size-72"
+          [class]="
+            'size-40 rounded-full border-4 border-surface shadow-2xl ' +
+            'shadow-accent/20 sm:size-52 lg:size-72'
+          "
         />
       }
 
       <!-- Math card: swap the equation for a favorite of your own. -->
-      <app-card
+      <!-- <app-card
         class="hidden rotate-1 self-stretch shadow-2xl shadow-accent/10 lg:flex"
       >
         <div class="flex items-center gap-1.5" aria-hidden="true">
@@ -87,14 +99,11 @@
           <span class="size-3 rounded-full bg-line"></span>
           <span class="size-3 rounded-full bg-line"></span>
         </div>
-        <app-math
-          class="py-4 text-xl"
-          tex="\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\, e^{-2\pi i x \xi}\, dx"
-        />
+        <app-math class="py-4 text-xl" [tex]="heroFormula" />
         <p class="font-mono text-xs text-muted">
           // theorem.prove(); code.ship();
         </p>
-      </app-card>
+      </app-card> -->
     </div>
   </div>
 </section>
@@ -196,7 +205,11 @@
 <!-- Contact CTA -->
 <section class="page-container pt-16">
   <div
-    class="relative overflow-hidden rounded-3xl bg-linear-to-br from-accent to-accent-2 px-8 py-14 text-center text-accent-ink sm:px-16"
+    [class]="
+      'relative overflow-hidden rounded-3xl bg-linear-to-br ' +
+      'from-accent to-accent-2 px-8 py-14 text-center ' +
+      'text-accent-ink sm:px-16'
+    "
   >
     <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Let's talk</h2>
     <p class="mx-auto mt-4 max-w-xl text-lg opacity-90">
@@ -204,7 +217,11 @@
     </p>
     <a
       [href]="'mailto:' + profile.email"
-      class="mt-8 inline-flex h-12 items-center gap-2 rounded-full bg-accent-ink px-6 font-medium text-ink transition-transform hover:-translate-y-px"
+      [class]="
+        'mt-8 inline-flex h-12 items-center gap-2 rounded-full ' +
+        'bg-accent-ink px-6 font-medium text-ink ' +
+        'transition-transform hover:-translate-y-px'
+      "
     >
       <app-icon name="mail" [size]="18" />
       {{ profile.email }}

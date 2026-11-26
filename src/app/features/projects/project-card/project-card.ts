@@ -27,7 +27,10 @@ import { Card, ExternalLink, Icon, Tag } from '@shared/ui';
             <a
               appExternal
               [href]="link.href"
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-accent"
+              [class]="
+                'inline-flex items-center gap-1.5 text-sm font-medium ' +
+                'text-muted transition-colors hover:text-accent'
+              "
             >
               @if (link.icon) {
                 <app-icon [name]="link.icon" [size]="16" />

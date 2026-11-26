@@ -36,5 +36,8 @@ export class ContentService {
   }
 }
 
-/** Slugs for prerendering `/writing/:slug`. Plain function so server routes can use it. */
+/**
+ * Slugs for prerendering `/writing/:slug`. Plain function so server routes
+ * can use it.
+ */
 export const postSlugs = (): string[] => POSTS.map((p) => p.slug);

@@ -32,7 +32,8 @@ export class ThemeService {
       try {
         localStorage.setItem(STORAGE_KEY, theme);
       } catch {
-        // Storage unavailable (private mode, etc.) — theme still applies for this visit.
+        // Storage unavailable (private mode, etc.). The theme still applies
+        // for this visit.
       }
     }
   }

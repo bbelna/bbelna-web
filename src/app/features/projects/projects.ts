@@ -15,7 +15,10 @@ import { ProjectCard } from './project-card/project-card';
         level="1"
         eyebrow="Projects"
         title="Things I've built"
-        description="Software, tools, and experiments — some practical, some mathematical."
+        [description]="
+          'Software, tools, and experiments. ' +
+          'Some practical, some mathematical.'
+        "
       />
       <div class="mt-12 grid gap-6 sm:grid-cols-2">
         @for (project of projects; track project.slug) {

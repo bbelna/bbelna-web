@@ -10,7 +10,10 @@ import { Button, ExternalLink, Icon } from '@shared/ui';
   host: { class: 'block border-t border-line mt-24' },
   template: `
     <div
-      class="page-container flex flex-col-reverse items-center justify-between gap-4 py-8 sm:flex-row"
+      [class]="
+        'page-container flex flex-col-reverse items-center ' +
+        'justify-between gap-4 py-8 sm:flex-row'
+      "
     >
       <p class="text-sm text-muted">
         © {{ year }} {{ profile.name }}. All rights reserved.

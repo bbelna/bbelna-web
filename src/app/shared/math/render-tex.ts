@@ -26,7 +26,10 @@ export function escapeHtml(text: string): string {
   return text.replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
 }
 
-/** `$$...$$` (display) or `$...$` (inline). A literal dollar sign is written `\$`. */
+/**
+ * `$$...$$` (display) or `$...$` (inline). A literal dollar sign is written
+ * `\$`.
+ */
 const MATH_PATTERN = /\$\$([\s\S]+?)\$\$|(?<!\\)\$((?:\\\$|[^$\n])+?)\$/g;
 
 /**

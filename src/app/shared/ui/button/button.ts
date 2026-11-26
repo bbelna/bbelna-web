@@ -10,7 +10,8 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 const BASE =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap ' +
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium ' +
+  'whitespace-nowrap ' +
   'transition-all duration-200 select-none cursor-pointer ' +
   'disabled:pointer-events-none disabled:opacity-50';
 
@@ -19,7 +20,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
     'bg-linear-to-r from-accent to-accent-2 text-accent-ink shadow-sm ' +
     'hover:shadow-lg hover:shadow-accent/25 hover:-translate-y-px',
   secondary:
-    'border border-line bg-surface text-ink hover:border-accent hover:text-accent',
+    'border border-line bg-surface text-ink hover:border-accent ' +
+    'hover:text-accent',
   ghost: 'text-muted hover:text-ink hover:bg-surface-2',
 };
 
@@ -42,7 +44,9 @@ const SQUARE_SIZES: Record<ButtonSize, string> = {
  * @example
  * <a appButton routerLink="/projects">Projects</a>
  * <button appButton variant="secondary" size="sm" (click)="...">Click</button>
- * <a appButton variant="ghost" square aria-label="GitHub"><app-icon name="github" /></a>
+ * <a appButton variant="ghost" square aria-label="GitHub">
+ *   <app-icon name="github" />
+ * </a>
  */
 @Component({
   selector: 'a[appButton], button[appButton]',
